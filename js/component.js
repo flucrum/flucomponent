@@ -1,60 +1,47 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createComponent = exports.ComponentConstructor = exports.Component = void 0;
-var Component = /** @class */ (function () {
-    function Component() {
-        this.css = '';
-        this.onInit = function () { };
-        this.onChange = function () { };
-        this.template = '';
-        this.state = {};
-    }
-    return Component;
-}());
-exports.Component = Component;
-var ComponentConstructor = /** @class */ (function () {
-    function ComponentConstructor(el, component, nodes) {
-        var _this = this;
-        this.append = function () {
-            _this.nodes.forEach(function (i) {
-                i.append(_this.el);
-                _this.el.outerHTML = _this.component.template.trim();
-            });
-        };
-        this.prepend = function () {
-            _this.nodes.forEach(function (i) {
-                i.prepend(_this.el);
-                _this.el.outerHTML = _this.component.template.trim();
-            });
-        };
-        this.before = function () {
-            _this.nodes.forEach(function (i) {
-                i.before(_this.el);
-                _this.el.outerHTML = _this.component.template.trim();
-            });
-        };
-        this.after = function () {
-            _this.nodes.forEach(function (i) {
-                i.after(_this.el);
-                _this.el.outerHTML = _this.component.template.trim();
-            });
-        };
-        this.replaceWith = function () {
-            _this.nodes.forEach(function (i) {
-                i.replaceWith(_this.el);
-                _this.el.outerHTML = _this.component.template.trim();
-            });
-        };
-        this.el = el;
-        this.component = component;
-        this.nodes = nodes;
-    }
-    return ComponentConstructor;
-}());
-exports.ComponentConstructor = ComponentConstructor;
-function createComponent(component, targetQuerySelector) {
-    var el = document.createElement('div');
-    var selected = document.querySelectorAll(targetQuerySelector);
-    return new ComponentConstructor(el, component, selected);
+exports.createComponents = void 0;
+function standartizeComponentBlueprint(component) {
+    return {
+        name: component.name,
+        css: (component.css && typeof component.css === 'string') ? component.css : '',
+        onInit: (component.onInit && typeof component.onInit === 'function')
+            ? component.onInit
+            : (function () { }),
+        onChange: (component.onChange && typeof component.onChange === 'function')
+            ? component.onChange
+            : (function () { }),
+        template: (component.template && typeof component.template === 'string')
+            ? component.template
+            : '',
+        state: (component.state && typeof component.state === 'object')
+            ? component.state
+            : {},
+    };
 }
-exports.createComponent = createComponent;
+function createComponents(component, nestingPoint) {
+    var componentStandaetized = standartizeComponentBlueprint(component);
+    var selected = nestingPoint.document.querySelectorAll(nestingPoint.selector);
+    var results = [];
+    var el;
+    selected.forEach(function (s) {
+        el = nestingPoint.document.createElement(component.name);
+        switch (nestingPoint.position) {
+            case 'append':
+                s.append(el);
+            case 'prepend':
+                s.prepend(el);
+            case 'before':
+                s.before(el);
+            case 'after':
+                s.after(el);
+            case 'replaceWith':
+                s.replaceWith(el);
+        }
+        ;
+        el.outerHTML = component.template;
+        results.push(el);
+    });
+    return results;
+}
+exports.createComponents = createComponents;

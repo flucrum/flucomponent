@@ -1,10 +1,15 @@
 import * as componentModule from "./component";
 
-export class TestComponent extends componentModule.Component
-{
-    public template: string = `
-    <h1>Hello!</h1>
-    `
+const blueprint: componentModule.ComponentBlueprint = {
+    name: "HelloHeader",
+    template: `<h1>Hello!</h1>`,
 }
 
-componentModule.createComponent(new TestComponent(), "body").append();
+const nest: componentModule.NestingPoint = {
+    selector: 'body',
+    position: 'append',
+    document: document,
+}
+
+const components = componentModule.createComponents(blueprint, nest);
+console.log(components[0]);
