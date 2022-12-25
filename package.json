@@ -1,0 +1,30 @@
+{
+  "name": "flucomponent",
+  "version": "1.0.0",
+  "description": "Flucrum vanilla components",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "mocha ./js/test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flucrum/flucomponent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flucrum/flucomponent/issues"
+  },
+  "homepage": "https://github.com/flucrum/flucomponent#readme",
+  "dependencies": {
+    "@types/mocha": "^10.0.1",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.13",
+    "fp-ts": "^2.13.1"
+  }
+}
