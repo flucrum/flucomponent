@@ -72,6 +72,9 @@ export function createComponents(component: ComponentBlueprint, nestingPoint: Ne
                 s.replaceWith(el);
         };
         el.outerHTML = component.template;
+        el.id = uuidModule.v4();
+        el.setAttribute('component-name', component.name);
+        component.onInit(el);
         results.push(el);
     });
     return results;

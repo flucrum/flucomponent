@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createComponents = void 0;
+var uuidModule = require("uuid");
 function standartizeComponentBlueprint(component) {
     return {
         name: component.name,
@@ -40,6 +41,9 @@ function createComponents(component, nestingPoint) {
         }
         ;
         el.outerHTML = component.template;
+        el.id = uuidModule.v4();
+        el.setAttribute('component-name', component.name);
+        component.onInit(el);
         results.push(el);
     });
     return results;
