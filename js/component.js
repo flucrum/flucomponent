@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createComponents = void 0;
+exports.createComponents = exports.declareComponent = void 0;
 var uuidModule = require("uuid");
 function standartizeComponentBlueprint(component) {
     return {
@@ -20,6 +20,17 @@ function standartizeComponentBlueprint(component) {
             : {},
     };
 }
+function declareComponent(component, document) {
+    var head = document.getElementsByTagName('head')[0];
+    var style = head.getElementsByTagName('style')[0];
+    if (!style) {
+        style = document.createElement('style');
+        style.setAttribute('type', 'text/css');
+        head.appendChild(style);
+    }
+    style.innerHTML = style.innerHTML + "\n" + component.css.trim();
+}
+exports.declareComponent = declareComponent;
 function createComponents(component, nestingPoint) {
     var componentStandaetized = standartizeComponentBlueprint(component);
     var selected = nestingPoint.document.querySelectorAll(nestingPoint.selector);

@@ -51,6 +51,18 @@ function standartizeComponentBlueprint(component: ComponentBlueprint): Component
     };
 }
 
+export function declareComponent(component: ComponentBlueprint, document: Document): void
+{
+    const head = document.getElementsByTagName('head')[0];
+    let style = head.getElementsByTagName('style')[0];
+    if(!style){
+        style = document.createElement('style');
+        style.setAttribute('type', 'text/css');
+        head.appendChild(style);
+    }
+    style.innerHTML = style.innerHTML + "\n" + component.css.trim();
+}
+
 export function createComponents(component: ComponentBlueprint, nestingPoint: NestingPoint): Array<HTMLElement>
 {
     const componentStandaetized = standartizeComponentBlueprint(component);

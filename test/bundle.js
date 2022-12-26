@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createComponents = void 0;
+exports.createComponents = exports.declareComponent = void 0;
 var uuidModule = require("uuid");
 function standartizeComponentBlueprint(component) {
     return {
@@ -21,6 +21,17 @@ function standartizeComponentBlueprint(component) {
             : {},
     };
 }
+function declareComponent(component, document) {
+    var head = document.getElementsByTagName('head')[0];
+    var style = head.getElementsByTagName('style')[0];
+    if (!style) {
+        style = document.createElement('style');
+        style.setAttribute('type', 'text/css');
+        head.appendChild(style);
+    }
+    style.innerHTML = style.innerHTML + "\n" + component.css.trim();
+}
+exports.declareComponent = declareComponent;
 function createComponents(component, nestingPoint) {
     var componentStandaetized = standartizeComponentBlueprint(component);
     var selected = nestingPoint.document.querySelectorAll(nestingPoint.selector);
@@ -58,6 +69,7 @@ var componentModule = require("./component");
 var blueprint = {
     name: "HelloHeader",
     template: "<h1>Hello!</h1>",
+    css: "\n    body {color: #777;}\n    ",
     onInit: function (el) { return console.log(el); },
 };
 var nest = {
@@ -65,6 +77,7 @@ var nest = {
     position: 'append',
     document: document,
 };
+componentModule.declareComponent(blueprint, document);
 var components = componentModule.createComponents(blueprint, nest);
 
 },{"./component":1}],3:[function(require,module,exports){
