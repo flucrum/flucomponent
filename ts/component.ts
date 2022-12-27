@@ -38,8 +38,6 @@ export type NestingPoint = {
 /**
  * Standartize optional properties of Component Blueprint, 
  * for simplify next work
- * @param component 
- * @returns 
  */
 function standartizeComponentBlueprint(
     component: ComponentBlueprint
@@ -66,8 +64,6 @@ function standartizeComponentBlueprint(
 
 /**
  * Initializing Blueprinted Component Type on the web page
- * @param component 
- * @param document 
  */
 export function declareComponent(
     component: ComponentBlueprint, 
@@ -85,9 +81,6 @@ export function declareComponent(
 
 /**
  * Creating Component on the page into specififyed Nesting Point
- * @param component 
- * @param nestingPoint 
- * @returns 
  */
 export function createComponents(
     component: ComponentBlueprint, 
