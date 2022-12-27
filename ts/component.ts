@@ -1,5 +1,7 @@
 import * as uuidModule from "uuid";
 
+//=== Types ===
+
 export type ComponentBlueprint = {
     name: string,
     css?: string,
@@ -31,11 +33,22 @@ export type NestingPoint = {
     document: Document,
 };
 
-function standartizeComponentBlueprint(component: ComponentBlueprint): ComponentBlueprintStandartized
-{
+//=== Functions ===
+
+/**
+ * Standartize optional properties of Component Blueprint, 
+ * for simplify next work
+ * @param component 
+ * @returns 
+ */
+function standartizeComponentBlueprint(
+    component: ComponentBlueprint
+): ComponentBlueprintStandartized {
     return {
         name: component.name,
-        css: (component.css && typeof component.css === 'string') ? component.css : '',
+        css: (component.css && typeof component.css === 'string') 
+            ? component.css 
+            : '',
         onInit: (component.onInit && typeof component.onInit === 'function') 
             ? component.onInit 
             : (() => {}),
@@ -51,8 +64,15 @@ function standartizeComponentBlueprint(component: ComponentBlueprint): Component
     };
 }
 
-export function declareComponent(component: ComponentBlueprint, document: Document): void
-{
+/**
+ * Initializing Blueprinted Component Type on the web page
+ * @param component 
+ * @param document 
+ */
+export function declareComponent(
+    component: ComponentBlueprint, 
+    document: Document
+): void {
     const head = document.getElementsByTagName('head')[0];
     let style = head.getElementsByTagName('style')[0];
     if(!style){
@@ -63,10 +83,20 @@ export function declareComponent(component: ComponentBlueprint, document: Docume
     style.innerHTML = style.innerHTML + "\n" + component.css.trim();
 }
 
-export function createComponents(component: ComponentBlueprint, nestingPoint: NestingPoint): Array<HTMLElement>
-{
+/**
+ * Creating Component on the page into specififyed Nesting Point
+ * @param component 
+ * @param nestingPoint 
+ * @returns 
+ */
+export function createComponents(
+    component: ComponentBlueprint, 
+    nestingPoint: NestingPoint
+): Array<HTMLElement> {
     const componentStandaetized = standartizeComponentBlueprint(component);
-    const selected = nestingPoint.document.querySelectorAll(nestingPoint.selector);
+    const selected = nestingPoint
+        .document
+        .querySelectorAll(nestingPoint.selector);
     let results: Array<HTMLElement> = [];
     let el: HTMLElement;
     selected.forEach(s => {
