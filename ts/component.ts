@@ -80,6 +80,35 @@ export function declareComponent(
 }
 
 /**
+ * Nesting Component into Nesting Point specifyed place into document
+ */
+function nestComponentIntoDocument(
+    s: Element, 
+    nestingPoint: NestingPoint,
+    component: ComponentBlueprint,
+    results: Array<HTMLElement>
+): void {
+    const el = nestingPoint.document.createElement(component.name);
+    switch (nestingPoint.position) {
+        case 'append':
+            s.append(el);
+        case 'prepend':
+            s.prepend(el);
+        case 'before':
+            s.before(el);
+        case 'after':
+            s.after(el);
+        case 'replaceWith':
+            s.replaceWith(el);
+    };
+    el.outerHTML = component.template;
+    el.id = uuidModule.v4();
+    el.setAttribute('component-name', component.name);
+    component.onInit(el);
+    results.push(el);
+}
+
+/**
  * Creating Component on the page into specififyed Nesting Point
  */
 export function createComponents(
@@ -92,25 +121,7 @@ export function createComponents(
         .querySelectorAll(nestingPoint.selector);
     let results: Array<HTMLElement> = [];
     let el: HTMLElement;
-    selected.forEach(s => {
-        el = nestingPoint.document.createElement(component.name);
-        switch (nestingPoint.position) {
-            case 'append':
-                s.append(el);
-            case 'prepend':
-                s.prepend(el);
-            case 'before':
-                s.before(el);
-            case 'after':
-                s.after(el);
-            case 'replaceWith':
-                s.replaceWith(el);
-        };
-        el.outerHTML = component.template;
-        el.id = uuidModule.v4();
-        el.setAttribute('component-name', component.name);
-        component.onInit(el);
-        results.push(el);
-    });
+    selected.forEach(
+        s => nestComponentIntoDocument(s, nestingPoint, component, results));
     return results;
 }
