@@ -1,4 +1,4 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createComponents = exports.declareComponent = void 0;
@@ -80,24 +80,7 @@ function createComponents(component, nestingPoint) {
 }
 exports.createComponents = createComponents;
 
-},{"uuid":3}],2:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var componentModule = require("./component");
-var blueprint = {
-    name: "HelloHeader",
-    template: "<h1>Hello!</h1>",
-    css: "\n    body {color: #777;}\n    ",
-    onInit: function (el) { return console.log(el); },
-};
-var nest = {
-    selector: 'body',
-    position: 'append',
-};
-componentModule.declareComponent(blueprint);
-var components = componentModule.createComponents(blueprint, nest);
-
-},{"./component":1}],3:[function(require,module,exports){
+},{"uuid":2}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -177,7 +160,7 @@ var _stringify = _interopRequireDefault(require("./stringify.js"));
 var _parse = _interopRequireDefault(require("./parse.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./nil.js":6,"./parse.js":7,"./stringify.js":11,"./v1.js":12,"./v3.js":13,"./v4.js":15,"./v5.js":16,"./validate.js":17,"./version.js":18}],4:[function(require,module,exports){
+},{"./nil.js":5,"./parse.js":6,"./stringify.js":10,"./v1.js":11,"./v3.js":12,"./v4.js":14,"./v5.js":15,"./validate.js":16,"./version.js":17}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -401,7 +384,7 @@ function md5ii(a, b, c, d, x, s, t) {
 
 var _default = md5;
 exports.default = _default;
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -413,7 +396,7 @@ var _default = {
   randomUUID
 };
 exports.default = _default;
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -422,7 +405,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = '00000000-0000-0000-0000-000000000000';
 exports.default = _default;
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -468,7 +451,7 @@ function parse(uuid) {
 
 var _default = parse;
 exports.default = _default;
-},{"./validate.js":17}],8:[function(require,module,exports){
+},{"./validate.js":16}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -477,7 +460,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 exports.default = _default;
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -503,7 +486,7 @@ function rng() {
 
   return getRandomValues(rnds8);
 }
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -608,7 +591,7 @@ function sha1(bytes) {
 
 var _default = sha1;
 exports.default = _default;
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -653,7 +636,7 @@ function stringify(arr, offset = 0) {
 
 var _default = stringify;
 exports.default = _default;
-},{"./validate.js":17}],12:[function(require,module,exports){
+},{"./validate.js":16}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -761,7 +744,7 @@ function v1(options, buf, offset) {
 
 var _default = v1;
 exports.default = _default;
-},{"./rng.js":9,"./stringify.js":11}],13:[function(require,module,exports){
+},{"./rng.js":8,"./stringify.js":10}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -778,7 +761,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const v3 = (0, _v.default)('v3', 0x30, _md.default);
 var _default = v3;
 exports.default = _default;
-},{"./md5.js":4,"./v35.js":14}],14:[function(require,module,exports){
+},{"./md5.js":3,"./v35.js":13}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -859,7 +842,7 @@ function v35(name, version, hashfunc) {
   generateUUID.URL = URL;
   return generateUUID;
 }
-},{"./parse.js":7,"./stringify.js":11}],15:[function(require,module,exports){
+},{"./parse.js":6,"./stringify.js":10}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -903,7 +886,7 @@ function v4(options, buf, offset) {
 
 var _default = v4;
 exports.default = _default;
-},{"./native.js":5,"./rng.js":9,"./stringify.js":11}],16:[function(require,module,exports){
+},{"./native.js":4,"./rng.js":8,"./stringify.js":10}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -920,7 +903,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const v5 = (0, _v.default)('v5', 0x50, _sha.default);
 var _default = v5;
 exports.default = _default;
-},{"./sha1.js":10,"./v35.js":14}],17:[function(require,module,exports){
+},{"./sha1.js":9,"./v35.js":13}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -938,7 +921,7 @@ function validate(uuid) {
 
 var _default = validate;
 exports.default = _default;
-},{"./regex.js":8}],18:[function(require,module,exports){
+},{"./regex.js":7}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -960,4 +943,22 @@ function version(uuid) {
 
 var _default = version;
 exports.default = _default;
-},{"./validate.js":17}]},{},[2]);
+},{"./validate.js":16}],"my-module":[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.blueprint = void 0;
+var componentModule = require("./component");
+exports.blueprint = {
+    name: "HelloHeader",
+    template: "<h1>Hello!</h1>",
+    css: "\n    body {color: #777;}\n    ",
+    onInit: function (el) { return console.log(el); },
+};
+var nest = {
+    selector: 'body',
+    position: 'append',
+};
+componentModule.declareComponent(exports.blueprint);
+var components = componentModule.createComponents(exports.blueprint, nest);
+
+},{"./component":1}]},{},[]);

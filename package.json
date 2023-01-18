@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "test": "mocha ./js/test/**/*.js",
-    "bundle": "browserify js/test.js -o test/bundle.js"
+    "bundle": "browserify -r js/test.js:my-module > bundle.js",
+    "build": "tsc && browserify -r ./js/test.js:my-module > test/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.13",
+    "concurrently": "^7.6.0",
     "fp-ts": "^2.13.1"
   }
 }

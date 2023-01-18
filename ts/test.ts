@@ -1,6 +1,6 @@
 import * as componentModule from "./component";
 
-const blueprint: componentModule.ComponentBlueprint = {
+export const blueprint: componentModule.ComponentBlueprint = {
     name: "HelloHeader",
     template: `<h1>Hello!</h1>`,
     css: `
