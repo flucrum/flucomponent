@@ -12,8 +12,7 @@ const blueprint: componentModule.ComponentBlueprint = {
 const nest: componentModule.NestingPoint = {
     selector: 'body',
     position: 'append',
-    document: document,
 }
 
-componentModule.declareComponent(blueprint, document);
+componentModule.declareComponent(blueprint);
 const components = componentModule.createComponents(blueprint, nest);

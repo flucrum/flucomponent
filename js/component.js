@@ -30,7 +30,7 @@ function standartizeComponentBlueprint(component) {
 /**
  * Initializing Blueprinted Component Type on the web page
  */
-function declareComponent(component, document) {
+function declareComponent(component) {
     var head = document.getElementsByTagName('head')[0];
     var style = head.getElementsByTagName('style')[0];
     if (!style) {
@@ -45,7 +45,7 @@ exports.declareComponent = declareComponent;
  * Nesting Component into Nesting Point specifyed place into document
  */
 function nestComponentIntoDocument(s, nestingPoint, component, results) {
-    var el = nestingPoint.document.createElement(component.name);
+    var el = document.createElement(component.name);
     switch (nestingPoint.position) {
         case 'append':
             s.append(el);
@@ -70,8 +70,7 @@ function nestComponentIntoDocument(s, nestingPoint, component, results) {
  */
 function createComponents(component, nestingPoint) {
     var componentStandaetized = standartizeComponentBlueprint(component);
-    var selected = nestingPoint
-        .document
+    var selected = document
         .querySelectorAll(nestingPoint.selector);
     var results = [];
     var el;

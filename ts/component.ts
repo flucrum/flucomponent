@@ -30,7 +30,6 @@ export type NestPositionVariant
 export type NestingPoint = {
     selector: string,
     position: NestPositionVariant,
-    document: Document,
 };
 
 //=== Functions ===
@@ -66,8 +65,7 @@ function standartizeComponentBlueprint(
  * Initializing Blueprinted Component Type on the web page
  */
 export function declareComponent(
-    component: ComponentBlueprint, 
-    document: Document
+    component: ComponentBlueprint
 ): void {
     const head = document.getElementsByTagName('head')[0];
     let style = head.getElementsByTagName('style')[0];
@@ -88,7 +86,7 @@ function nestComponentIntoDocument(
     component: ComponentBlueprint,
     results: Array<HTMLElement>
 ): void {
-    const el = nestingPoint.document.createElement(component.name);
+    const el = document.createElement(component.name);
     switch (nestingPoint.position) {
         case 'append':
             s.append(el);
@@ -116,8 +114,7 @@ export function createComponents(
     nestingPoint: NestingPoint
 ): Array<HTMLElement> {
     const componentStandaetized = standartizeComponentBlueprint(component);
-    const selected = nestingPoint
-        .document
+    const selected = document
         .querySelectorAll(nestingPoint.selector);
     let results: Array<HTMLElement> = [];
     let el: HTMLElement;

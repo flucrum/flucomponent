@@ -10,7 +10,6 @@ var blueprint = {
 var nest = {
     selector: 'body',
     position: 'append',
-    document: document,
 };
-componentModule.declareComponent(blueprint, document);
+componentModule.declareComponent(blueprint);
 var components = componentModule.createComponents(blueprint, nest);
